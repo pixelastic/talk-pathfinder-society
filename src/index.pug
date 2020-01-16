@@ -1,0 +1,207 @@
+extends /_includes/_layouts/sov
+
+block config
+  - pageTitle = "Automating Side Projects"
+  - pageDescription = "How to keep your sanity while while keeping your side projects up to date"
+  - pageAuthor = "Tim Carry"
+  - pageTwitter = "pixelastic"
+  - pageUrl = "Your url"
+
+block slides
+  +slide.bg-green.text-7
+    .fla.flcnw.flc.white.text-shadow.amaranth.bold
+      .fln Automating side projects
+
+  include /_includes/_slides/who-am-i.pug
+
+  +slide
+    +title Side project life cycle
+    .fla.flcnw.flccv.text-4.pl-9.flspa
+      .fln 💡 You have an awesome idea
+      .fln 👷‍♀️ You build and deploy it
+      .fln 🥰  Everybody is happy
+      .fln.gray-5(data-step) ⌛ Time passes
+      .fln(data-step) 👩‍⚕️ You go back to fix a typo
+      .fln.bold.red(data-step) 🔥 Everything is broken
+    .notes
+      p Deps are out of sync
+      p Forgot the codebase
+      p Does not happen with work project
+      ul.ml-2
+        li.bullet Always on it
+        li.bullet Codebase in mind
+        li.bullet More stakes
+
+  +slide.bg-green.text-7
+    .fla.flcnw.flc.white.text-shadow.amaranth.bold
+      .fln Real-life example
+
+
+  +slide.bg-cover.bg-no-repeat(style="background-image:url(./assets/images/gm.png)")
+    .absolute.top-0.right-0.bottom-0.left-0.bg-black.bg-opacity-75p
+    .relative.fla.flcnw.flc
+      .text-shadow.gray-2.amaranth.text-7
+        .flcnw.flc
+          .fln.flrnw
+            .fln.mr-4 I play
+            .fln
+              img.h-13(src="./assets/images/dndlogo.png")
+          .fln every Sunday
+    .notes
+      p As a GM, I need to tell a story for my players
+      p I read published material for inspiration
+  
+  +slide
+    .absolute.top-0.right-0.bottom-0.left-0.fla.flrw
+      - var index = 0;
+      while index < 50
+        .fln.w-10p
+          img(src=`./assets/images/covers/${index}.jpg`)
+        - index++
+    .absolute.top-0.right-0.bottom-0.left-0.bg-black.bg-opacity-75p
+    .relative.white.flcnw.fla
+      .fla.flrnw
+        .fln.flcnw.flc.w-50p
+          img(src="./assets/images/pathfinder-society.png")
+          .text-3.text-shadow 320+ published adventures
+        .fln.flcnw.flc.w-50p.p-3
+          img.border-01.border-gray-6.rounded-1(src="./assets/images/pathfinderwiki.png")
+          a.underline(href="https://pathfinderwiki.com") https://pathfinderwiki.com
+
+  +slide
+    +title.red-8.text-shadow-white.underline gamemaster.pixelastic.com/society
+    .fla.flcnw.flc
+      img.rounded-1.w-75p(src="./assets/images/society-search.png")
+
+  +slide
+    +title A Tale of Two Repos
+    .fla.flrnw
+      .fln.flcnw
+        .fln society-data
+        .fln npm module
+        .fln data as JSON
+        .fln scripts to transform the wiki in json
+      .fln.flcnw
+        .fln society-website
+        .fln static website
+        .fln deploy on netlify
+        .fln depends on society-data
+        .fln script to push to algolia
+
+  +slide
+    +title Manual automation
+    p yarn run regenerate to get latest data
+    p yarn run release to release a new data module
+    p yarn update data on the website
+    p yarn run algolia to push it
+    p git push to redeploy to Netlify
+    .notes
+      p Scripts to do most of the things
+      p Still need to call the scripts...
+
+  +slide.bg-green.text-7
+    .fla.flcnw.flc.white.text-shadow.amaranth.bold
+      .fln Settings goals
+
+  +slide
+    +title Automation goal
+    p Release a fresh version of the data every week
+    p Keep data in Algolia up to date
+    p Deployed website should use latest libraries
+
+  +slide
+    +title Keeping libraries up to date
+    p Renovate (gros logo)
+    p GitHub bot on all or specific repos
+    p Reads your package.json, create a PR if new version available
+    p Example lodash 4.13.2 / 4.15. Screenshot of a PR
+
+  +slide
+    +title Renovate unpluggued
+    p Configured it even more
+    p Automatically merge patch and minor to master
+    p Creates PR only for major
+    p Bonus: Each commit on master triggers a deploy, so website always has latest frontend libraries
+
+  +slide.bg-red.text-7
+    .fla.flcnw.flc.white.text-shadow.amaranth.bold
+      .fln YOLO commits
+    .notes
+      p Accepting a bot to commit + deploy?
+
+  +slide
+    +title No broken builds
+    p CircleCI
+    p Script run on each commit. Sets a Ok or Failing flag.
+    p Attempt to build and test the lib
+    p Renovate will not merge if failing, but create a PR instead
+    p So only changes that don't break are committed to master
+
+  +slide
+    +title Scheduled runs
+    p Configured to run every week instead of on commit
+    p Recrawl the wiki and create a new PR with the changes
+    p If errors during crawling, create a PR instead
+    p Allows me to manually check before merging
+    .notes
+      p Crawling is hard. Especially user-generated content
+      p Can fail for many reasons
+      p I don't trust my own script that much
+      p Using Octokit for create Issue/PR
+
+  +slide
+    +title Releasing to NPM
+    p When PR is accepted, it will release a new version to npm
+    p This is getting more complex. I'll need several pieces
+
+  +slide
+    +title CircleCI to run the job
+    p I can create a new job on CircleCI that runs yarn run release patch
+    p Run can be triggered through the API
+
+  +slide
+    +title GitHub WebHooks
+    p GitHub can ping a url when specific even occured
+    p Like when a PR is merged
+    p I could ping my CircleCI url when the PR is merged!
+
+  +slide
+    +title Not so easy
+    p GitHub webhooks are very generic
+    p All PRs, merged or closed
+    p Need a proxy to filter out the useless events and only triger on the right on
+
+  +slide
+    +title Netlify Functions
+    p Netlify allow host dynamic nodejs scripts
+    p Basically AWS lambda but deployed from the same repo
+    p Reads incoming payload, check if correct PR and ping CircleCI
+
+  +slide
+    +title Recap
+    p Every week the wiki is crawled and a PR created
+    p When I accept it, GitHub sends a ping to my proxy
+    p Everything checks out, it pings CircleCI that releases a new version
+    p Because new dep, Renovate will pick up on the website
+    p Make a commit on master with update with the new data
+
+  +slide
+    +title Re-indexing
+    p Want to catch the commit that updates the update
+    p Once again, too broad, listens to all commits
+    p Create a proxy, find the right commit and run yarn run algolia
+    p Now everything is ran correctly
+
+  +slide
+    +title My usual routine
+    p Tuesday morning coffee, I read the PR
+    p I validate it and go to work
+    p In the background it will do a release of the module, which will trigger a re-indexing of the data and deploy of the website
+    p If I need to work on the project, a git pull gives me all the deps updated
+
+  +slide
+    +title Gotchas
+    p It's a complex setup. Moving pieces.
+    p Important to document (or make a talk about it)
+    p Hard to debug. WebHooks ok, Netlify bad, CircleCI awesome.
+    p Suggest Sentry?
