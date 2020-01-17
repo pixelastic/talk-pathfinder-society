@@ -12,8 +12,6 @@ block slides
     .fla.flcnw.flc.white.text-shadow.amaranth.bold
       .fln Automating side projects
 
-  include /_includes/_slides/who-am-i.pug
-
   +slide
     +title Side project life cycle
     .fla.flcnw.flccv.text-4.pl-9.flspa
@@ -31,6 +29,8 @@ block slides
         li.bullet Always on it
         li.bullet Codebase in mind
         li.bullet More stakes
+
+  include /_includes/_slides/who-am-i.pug
 
   +slide.bg-green.text-7
     .fla.flcnw.flc.white.text-shadow.amaranth.bold
@@ -68,84 +68,188 @@ block slides
           img.border-01.border-gray-6.rounded-1(src="./assets/images/pathfinderwiki.png")
           a.underline(href="https://pathfinderwiki.com") https://pathfinderwiki.com
 
-  +slide
-    +title.red-8.text-shadow-white.underline gamemaster.pixelastic.com/society
+  +slide.bg-cover.bg-no-repeat(style="background-image:url(./assets/images/society-search.png)")
     .fla.flcnw.flc
-      img.rounded-1.w-75p(src="./assets/images/society-search.png")
+      a.amaranth.white.text-shadow.text-6.bg-black.bg-opacity-75p.px-2.rounded(href="https://gamemaster.pixelastic.com/society/") gamemaster.pixelastic.com/society
 
   +slide
     +title A Tale of Two Repos
     .fla.flrnw
-      .fln.flcnw
-        .fln society-data
-        .fln npm module
-        .fln data as JSON
-        .fln scripts to transform the wiki in json
-      .fln.flcnw
-        .fln society-website
-        .fln static website
-        .fln deploy on netlify
-        .fln depends on society-data
-        .fln script to push to algolia
+      .fln.w-50p.p-1.flcnw.border-gray-5.border-001
+        .fln.flrnw.mb-2.gray.debu
+          .fln.fill-current.flcnw.flc.px-01
+            include /_includes/octicon-repo.svg
+          .fln.blue.px-01 pixelastic
+          .fln.px-01 /
+          .fln.blue.bold.px-01 society-data
+        .fla.flcnw.flspa
+          .fln
+            img(src="./assets/images/society-data.png")
+          .fln
+            .codeblock.language-js.pl-1 // data.json
+            .codeblock.language-json.text-1.overflow-hidden.px-1.pb-1
+              | "stayOfExecution": {
+              |   "title": "Stay of Execution",
+              |   "authors": ["Alison McKenzie"],
+              |   "backcover": "When a petty thief named Hadge gets a lucky break and makes off with a powerful divination focus of the Pathfinder Society's masked leadership, you and your fellow Pathfinders set out to the sparsely populated Taldor frontier to find him and recover the focus. When the local governor tosses Hadge into the brutal Porthmos Prison for a minor crime, your mission suddenly becomes a jail break. Will you free Hadge and uncover the location of the focus before the gangs of Porthmos tear him apart?",
+              |   "locations": ["Taldor", "Sardis Township", "Porthmos Prison"],
+              |   "price": 3.99,
+              |   "rating": 2.3,
+              |   …}
+      .fln.w-50p.p-1.flcnw.border-gray-5.border-001.border-l-0
+        .fln.flrnw.mb-2.gray
+          .fln.fill-current.flcnw.flc.px-1
+            include /_includes/octicon-repo.svg
+          .fln.blue.px-01 pixelastic
+          .fln.px-01 /
+          .fln.blue.bold.px-01 society-website
+        .fla.flcnw.flspa
+          .fln.flcnw.flc
+            img.h-15(src="./assets/images/society-search.png")
+          .fln
+            .codeblock.language-js.pl-1 // package.json
+            .codeblock.language-json.text-1.overflow-hidden.px-1.pb-1
+              | "devDependencies": {
+              |   …
+              |   "society-data": "0.3.24",
+              |   …
+              | }
 
   +slide
     +title Manual automation
-    p yarn run regenerate to get latest data
-    p yarn run release to release a new data module
-    p yarn update data on the website
-    p yarn run algolia to push it
-    p git push to redeploy to Netlify
-    .notes
-      p Scripts to do most of the things
-      p Still need to call the scripts...
+    .fla.flrnw
+      .fln.w-50p.p-1.flcnw.border-gray-5.border-001
+        .fln.flrnw.mb-2.gray
+          .fln.fill-current.flcnw.flc.px-01
+            include /_includes/octicon-repo.svg
+          .fln.blue.px-01 pixelastic
+          .fln.px-01 /
+          .fln.blue.bold.px-01 society-data
+        .fla.flcnw.flspa.text-3.gray-7
+          .fln
+            .fln.flcnw.flc
+              code.code $ yarn run regenerate
+            .fln.p-1 Recrawl #[span.underline.gray-8 pathfinderwiki.com]
+          .fln
+            .fln.flcnw.flc
+              code.code $ yarn run release
+            .fln.p-1 Release a new version to npm
+      .fln.w-50p.p-1.flcnw.border-gray-5.border-001.border-l-0
+        .fln.flrnw.mb-2.gray
+          .fln.fill-current.flcnw.flc.px-1
+            include /_includes/octicon-repo.svg
+          .fln.blue.px-01 pixelastic
+          .fln.px-01 /
+          .fln.blue.bold.px-01 society-website
+        .fla.flcnw.flspa.text-3.gray-7
+          .fln
+            .fln.flcnw.flc
+              code.code.text-2
+                p $ yarn remove #[span.blue-4.bold society-data]
+                p $ yarn add --dev #[span.blue-4.bold society-data]
+                p $ yarn run algolia
+            .fln.p-1 Update the data in Algolia
+          .fln
+            .fln.flcnw.flc
+              code.code $ git push
+            .fln.p-1 Deploy the website
 
   +slide.bg-green.text-7
     .fla.flcnw.flc.white.text-shadow.amaranth.bold
       .fln Settings goals
 
   +slide
-    +title Automation goal
-    p Release a fresh version of the data every week
-    p Keep data in Algolia up to date
-    p Deployed website should use latest libraries
+    +title What I want
+    .fla.flcnw.text-5.flc
+      .fln.flspa.flcnw.gray-7.h-80p
+        .fln 📦 Libraries up to date
+        .fln 💔 ...without breaking anything
+        .fln 🕖 Weekly update of the data
+        .fln 🔎 Algolia data in sync
 
   +slide
-    +title Keeping libraries up to date
-    p Renovate (gros logo)
-    p GitHub bot on all or specific repos
-    p Reads your package.json, create a PR if new version available
-    p Example lodash 4.13.2 / 4.15. Screenshot of a PR
-
-  +slide
-    +title Renovate unpluggued
-    p Configured it even more
-    p Automatically merge patch and minor to master
-    p Creates PR only for major
-    p Bonus: Each commit on master triggers a deploy, so website always has latest frontend libraries
-
-  +slide.bg-red.text-7
-    .fla.flcnw.flc.white.text-shadow.amaranth.bold
-      .fln YOLO commits
+    +title 📦 Keeping libraries up to date
+    .fla.flrnw
+      .fln.w-50p.p-1.flcnw.flc
+        a.fln.flcnw.flc(href="https://docs.renovatebot.com/install-github-app/" target="_blank")
+          img.h-70p.p-4(src="./assets/images/renovate.png")
+          .blue-7.bold.text-center.p-2.text-3 Renovate Bot
+      .fla.flcnw.flspa
+        .fln.h-50p.flcnw.bg-contain.bg-no-repeat.bg-left(style="background-image:url(./assets/images/renovate-pr.png)")
+        .fln.h-40p.flcnw.bg-contain.bg-no-repeat.bg-center(style="background-image:url(./assets/images/renovate-diff.png)")
     .notes
-      p Accepting a bot to commit + deploy?
+      p Automatically merge patch and minor
+      p Creates PR only for major
 
   +slide
-    +title No broken builds
-    p CircleCI
-    p Script run on each commit. Sets a Ok or Failing flag.
-    p Attempt to build and test the lib
-    p Renovate will not merge if failing, but create a PR instead
-    p So only changes that don't break are committed to master
+    +title What I want
+    .fla.flcnw.text-5.flc
+      .fln.flspa.flcnw.gray-7.h-80p
+        .fln.bold.green ✔ Libraries up to date
+        .fln 💔 ...without breaking anything
+        .fln.opacity-50p 🕖 Weekly update of the data
+        .fln.opacity-50p 🔎 Algolia data in sync
 
   +slide
-    +title Scheduled runs
-    p Configured to run every week instead of on commit
-    p Recrawl the wiki and create a new PR with the changes
-    p If errors during crawling, create a PR instead
-    p Allows me to manually check before merging
+    +title ❤️  No broken builds
+    .fla.flrnw
+      .fln.w-40p.flcnw.flc
+        a.fln.flcnw.flc.w-80p(href="https://circleci.com/" target="_blank")
+          img(src="./assets/images/circleci.png")
+      .fla.flcnw.flccv
+        .fln.flcnw.flspa.h-50p
+          .fln.flcnw
+            .fln.flrnw.flrcv
+              .fln.green.pr-4 ✔
+              .fln.pr-2
+                img.h-5.w-5(src="./assets/images/circleci-icon.png")
+              .fln.bold.gray-8 ci/circleci: ci
+              .fln.pl-1.gray-6 — Your tests passed on CircleCI!
+            .fln.text-center Renovate will #[.inline.bold merge to master]
+          .fln.flcnw
+            .fln.flrnw.flrcv
+              .fln.red.pr-4 ✘
+              .fln.pr-2
+                img.h-5.w-5(src="./assets/images/circleci-icon.png")
+              .fln.bold.gray-8 ci/circleci: ci
+              .fln.pl-1.gray-6 — Your tests failed on CircleCI
+            .fln.text-center Renovate will #[.inline.bold create a Pull Request]
+
+  +slide
+    +title What I want
+    .fla.flcnw.text-5.flc
+      .fln.flspa.flcnw.gray-7.h-80p
+        .fln.bold.green ✔ Libraries up to date
+        .fln.bold.green ✔ ...without breaking anything
+        .fln 🕖 Weekly update of the data
+        .fln.opacity-50p 🔎 Algolia data in sync
+
+  +slide
+    +title 🕖 Scheduled runs
+    .fla.flrnw
+      .fln.w-40p.flcnw
+        .fla.codeblock.language-yml.text-1.overflow-hidden.p-3.pb-1
+          | # .circleci/config.yml
+          | workflows:
+          |   weeklyUpdate:
+          |     triggers:
+          |       - schedule:
+          |           cron: '0 9 * * 2'
+          |     jobs:
+          |       - weeklyUpdate
+          |       
+          | jobs:
+          |   weeklyUpdate:
+          |     steps:
+          |       - run: 'yarn run weeklyUpdate'
+      .fla.flcnw
+        .fln.flcnw.flc
+          code.code $ yarn run weeklyUpdate
+        .fla.bg-no-repeat.bg-contain.bg-center(style="background-image:url(./assets/images/weeklyUpdate-pr.png)")
     .notes
+      p Create an issue if error
+      p Allow me to manually check before merging
       p Crawling is hard. Especially user-generated content
-      p Can fail for many reasons
       p I don't trust my own script that much
       p Using Octokit for create Issue/PR
 
