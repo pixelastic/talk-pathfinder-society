@@ -12,6 +12,8 @@ block slides
     .fla.flcnw.flc.white.text-shadow.amaranth.bold
       .fln Automating side projects
 
+  include /_includes/_slides/who-am-i.pug
+
   +slide
     +title Side project life cycle
     .fla.flcnw.flccv.text-4.pl-9.flspa
@@ -30,7 +32,6 @@ block slides
         li.bullet Codebase in mind
         li.bullet More stakes
 
-  include /_includes/_slides/who-am-i.pug
 
   +slide.bg-green.text-7
     .fla.flcnw.flc.white.text-shadow.amaranth.bold
@@ -73,19 +74,45 @@ block slides
       a.amaranth.white.text-shadow.text-6.bg-black.bg-opacity-75p.px-2.rounded(href="https://gamemaster.pixelastic.com/society/") gamemaster.pixelastic.com/society
 
   +slide
-    +title A Tale of Two Repos
+    +title What I want
+    .fla.flcnw.text-5.flc
+      .fln.flspa.flcnw.gray-7.h-60p
+        .fln 📦 Automated library updates
+        .fln 🕖 Automated data update
+        .fln 💔 ...without breaking anything
+
+  +slide
     .fla.flrnw
-      .fln.w-50p.p-1.flcnw.border-gray-5.border-001
-        .fln.flrnw.mb-2.gray.debu
+      .fln.w-50p.p-1.flcnw
+        .fln.flrnw.mb-2.gray
+          .fln.fill-current.flcnw.flc.px-1
+            include /_includes/octicon-repo.svg
+          .fln.blue.px-01 pixelastic
+          .fln.px-01 /
+          .fln.blue.bold.px-01 society-website
+        .fla.flcnw.flcab
+          .fln.flcnw.flc
+            img.h-17(src="./assets/images/society-search.png")
+          .fla.flcnw.flcab
+            .codeblock.language-js.pl-1 // package.json
+            .codeblock.language-json.text-1.overflow-hidden.px-1.pb-1
+              | "dependencies": {
+              |    "algoliasearch": "^3.35.1",
+              |    "instantsearch.js": "^4.1.1",
+              |    "lazysizes": "^5.2.0",
+              |    "lodash-es": "^4.17.15"
+              | }
+      .fln.w-50p.p-1.flcnw.border-gray-5.border-l-001
+        .fln.flrnw.mb-2.gray
           .fln.fill-current.flcnw.flc.px-01
             include /_includes/octicon-repo.svg
           .fln.blue.px-01 pixelastic
           .fln.px-01 /
           .fln.blue.bold.px-01 society-data
-        .fla.flcnw.flspa
-          .fln
-            img(src="./assets/images/society-data.png")
-          .fln
+        .fla.flcnw.flcab
+          .fla.flcnw.flc
+            img.scale-130p(src="./assets/images/society-data.png")
+          .fln.flcnw.flcab
             .codeblock.language-js.pl-1 // data.json
             .codeblock.language-json.text-1.overflow-hidden.px-1.pb-1
               | "stayOfExecution": {
@@ -96,29 +123,31 @@ block slides
               |   "price": 3.99,
               |   "rating": 2.3,
               |   …}
-      .fln.w-50p.p-1.flcnw.border-gray-5.border-001.border-l-0
+
+  +slide.bg-green.text-7
+    .fla.flcnw.flc.white.text-shadow.amaranth.bold
+      .fln Manual automation
+
+  +slide
+    .fla.flrnw
+      .fln.w-50p.p-1.flcnw.border-gray-5.border-r-001
         .fln.flrnw.mb-2.gray
           .fln.fill-current.flcnw.flc.px-1
             include /_includes/octicon-repo.svg
           .fln.blue.px-01 pixelastic
           .fln.px-01 /
           .fln.blue.bold.px-01 society-website
-        .fla.flcnw.flspa
-          .fln.flcnw.flc
-            img.h-15(src="./assets/images/society-search.png")
+        .fla.flcnw.flspa.text-3.gray-7
           .fln
-            .codeblock.language-js.pl-1 // package.json
-            .codeblock.language-json.text-1.overflow-hidden.px-1.pb-1
-              | "devDependencies": {
-              |   …
-              |   "society-data": "0.3.24",
-              |   …
-              | }
-
-  +slide
-    +title Manual automation
-    .fla.flrnw
-      .fln.w-50p.p-1.flcnw.border-gray-5.border-001
+            .fln.flcnw.flc
+              code.code
+                p $ yarn upgrade --latest
+            .fln.p-1 Update dependencies
+          .fln
+            .fln.flcnw.flc
+              code.code $ git push
+            .fln.p-1 Deploy the website
+      .fln.w-50p.p-1.flcnw
         .fln.flrnw.mb-2.gray
           .fln.fill-current.flcnw.flc.px-01
             include /_includes/octicon-repo.svg
@@ -132,47 +161,16 @@ block slides
             .fln.p-1 Recrawl #[span.underline.gray-8 pathfinderwiki.com]
           .fln
             .fln.flcnw.flc
-              code.code $ yarn run release
-            .fln.p-1 Release a new version to npm
-      .fln.w-50p.p-1.flcnw.border-gray-5.border-001.border-l-0
-        .fln.flrnw.mb-2.gray
-          .fln.fill-current.flcnw.flc.px-1
-            include /_includes/octicon-repo.svg
-          .fln.blue.px-01 pixelastic
-          .fln.px-01 /
-          .fln.blue.bold.px-01 society-website
-        .fla.flcnw.flspa.text-3.gray-7
-          .fln
-            .fln.flcnw.flc
-              code.code.text-2
-                p $ yarn remove #[span.blue-4.bold society-data]
-                p $ yarn add --dev #[span.blue-4.bold society-data]
-                p $ yarn run algolia
-            .fln.p-1 Update the data in Algolia
-          .fln
-            .fln.flcnw.flc
-              code.code $ git push
-            .fln.p-1 Deploy the website
+              code.code $ yarn run algolia
+            .fln.p-1 Push data to Algolia index
 
-  +slide.bg-green.text-7
-    .fla.flcnw.flc.white.text-shadow.amaranth.bold
-      .fln Settings goals
-
-  +slide
-    +title What I want
-    .fla.flcnw.text-5.flc
-      .fln.flspa.flcnw.gray-7.h-80p
-        .fln 📦 Libraries up to date
-        .fln 💔 ...without breaking anything
-        .fln 🕖 Weekly update of the data
-        .fln 🔎 Algolia data in sync
 
   +slide
     +title 📦 Keeping libraries up to date
     .fla.flrnw
       .fln.w-50p.p-1.flcnw.flc
         a.fln.flcnw.flc(href="https://docs.renovatebot.com/install-github-app/" target="_blank")
-          img.h-70p.p-4(src="./assets/images/renovate.png")
+          img.w-70p(src="./assets/images/renovate.png")
           .blue-7.bold.text-center.p-2.text-3 Renovate Bot
       .fla.flcnw.flspa
         .fln.h-50p.flcnw.bg-contain.bg-no-repeat.bg-left(style="background-image:url(./assets/images/renovate-pr.png)")
@@ -182,16 +180,7 @@ block slides
       p Creates PR only for major
 
   +slide
-    +title What I want
-    .fla.flcnw.text-5.flc
-      .fln.flspa.flcnw.gray-7.h-80p
-        .fln.bold.green ✔ Libraries up to date
-        .fln 💔 ...without breaking anything
-        .fln.opacity-50p 🕖 Weekly update of the data
-        .fln.opacity-50p 🔎 Algolia data in sync
-
-  +slide
-    +title ❤️  No broken builds
+    +title 💔 ...without breaking anything
     .fla.flrnw
       .fln.w-40p.flcnw.flc
         a.fln.flcnw.flc.w-80p(href="https://circleci.com/" target="_blank")
@@ -218,11 +207,10 @@ block slides
   +slide
     +title What I want
     .fla.flcnw.text-5.flc
-      .fln.flspa.flcnw.gray-7.h-80p
-        .fln.bold.green ✔ Libraries up to date
-        .fln.bold.green ✔ ...without breaking anything
-        .fln 🕖 Weekly update of the data
-        .fln.opacity-50p 🔎 Algolia data in sync
+      .fln.flspa.flcnw.gray-7.h-60p
+        .fln.bold.green ✔ Automated library updates
+        .fln 🕖 Automated data update
+        .fln 💔 ...without breaking anything
 
   +slide
     +title 🕖 Scheduled runs
@@ -231,6 +219,7 @@ block slides
         .fla.codeblock.language-yml.text-1.overflow-hidden.p-3.pb-1
           | # .circleci/config.yml
           | workflows:
+          |   …
           |   weeklyUpdate:
           |     triggers:
           |       - schedule:
@@ -241,6 +230,7 @@ block slides
           | jobs:
           |   weeklyUpdate:
           |     steps:
+          |       - …
           |       - run: 'yarn run weeklyUpdate'
       .fla.flcnw
         .fln.flcnw.flc
@@ -254,58 +244,135 @@ block slides
       p Using Octokit for create Issue/PR
 
   +slide
-    +title Releasing to NPM
-    p When PR is accepted, it will release a new version to npm
-    p This is getting more complex. I'll need several pieces
+    +title 🔎 Updating the Algolia index
+    .fla.flrnw.p-4
+      //- Rebase
+      .fln.w-33p.flcnw.flccv
+        .fln.flrnw.h-40p
+          .fla.flrnw
+            .fla.flcnw.bg-gray-4.rounded-4.p-2
+              .fla.bg-no-repeat.bg-contain.bg-center(style="background-image:url(./assets/images/rebase.png)")
+          .fln.flcnw.flc
+            .text-3.px-1 ➡️
+
+      .fln.w-33p.flcnw.flccv
+        .fln.h-40p.flrnw
+          .fla.flcnw.bg-gray-8.rounded-4.p-2.white.flc
+            .text-8.amaranth.text-shadow ?
+
+      //- Algolia
+      .fln.w-33p.flcnw.flccv
+        .fln.flrnw.h-40p
+          .fln.flcnw.flc
+            .text-3.px-1 ➡️
+          .fla.flrnw
+            .fla.flcnw.bg-algolia.rounded-4.p-2
+              .fla.bg-no-repeat.bg-contain.bg-center(style="background-image:url(./assets/images/algolia-logo-white.png)")
+  +slide
+    +title 🔎 Updating the Algolia index with webhooks
+    .fla.flrnw.p-4
+      //- Rebase
+      .fln.w-33p.flcnw.flccv
+        .fln.flrnw.h-40p
+          .fla.flrnw
+            .fla.flcnw.bg-gray-4.rounded-4.p-2
+              .fla.bg-no-repeat.bg-contain.bg-center(style="background-image:url(./assets/images/rebase.png)")
+          .fln.flcnw.flc
+            .text-3.px-1 ➡️
+
+      .fln.w-33p.flcnw.flccv
+        .fln.h-40p.flrnw
+          .fla.flcnw.bg-blue-9.rounded-4.p-2.white
+            .fla.bg-no-repeat.bg-contain.bg-center(style="background-image:url(./assets/images/github-logo-white.png)")
+            .fln.text-3.text-center GitHub Webhooks
+
+      //- Algolia
+      .fln.w-33p.flcnw.flccv
+        .fln.flrnw.h-40p
+          .fln.flcnw.flc
+            .text-3.px-1 ➡️
+          .fla.flrnw
+            .fla.flcnw.bg-algolia.rounded-4.p-2
+              .fla.bg-no-repeat.bg-contain.bg-center(style="background-image:url(./assets/images/algolia-logo-white.png)")
 
   +slide
-    +title CircleCI to run the job
-    p I can create a new job on CircleCI that runs yarn run release patch
-    p Run can be triggered through the API
+    +title 🔎 Updating the Algolia index with webhooks and CircleCI
+    .fla.flrnw.p-4
+      //- Rebase
+      .fln.w-33p.flcnw.flcat
+        .fln.flrnw.h-40p
+          .fla.flrnw
+            .fla.flcnw.bg-gray-4.rounded-4.p-2
+              .fla.bg-no-repeat.bg-contain.bg-center(style="background-image:url(./assets/images/rebase.png)")
+          .fln.flcnw.flc
+            .text-3.px-1 ➡️
+
+      .fln.w-33p.flcnw.flspb
+        .fln.h-40p.flrnw
+          .fla.flcnw.bg-blue-9.rounded-4.p-2.white
+            .fla.bg-no-repeat.bg-contain.bg-center(style="background-image:url(./assets/images/github-logo-white.png)")
+            .fln.text-3.text-center GitHub Webhooks
+
+        .fln.text-center.text-3 ⬇️
+
+        .fln.h-40p.flrnw
+          .fla.flcnw.bg-gray-8.rounded-4.p-2.white
+            .fla.bg-no-repeat.bg-contain.bg-center(style="background-image:url(./assets/images/circleci-logo-white.png)")
+            .fln.text-3.text-center CircleCI
+
+      //- Algolia
+      .fln.w-33p.flcnw.flcab
+        .fln.flrnw.h-40p
+          .fln.flcnw.flc
+            .text-3.px-1 ➡️
+          .fla.flrnw
+            .fla.flcnw.bg-algolia.rounded-4.p-2
+              .fla.bg-no-repeat.bg-contain.bg-center(style="background-image:url(./assets/images/algolia-logo-white.png)")
 
   +slide
-    +title GitHub WebHooks
-    p GitHub can ping a url when specific even occured
-    p Like when a PR is merged
-    p I could ping my CircleCI url when the PR is merged!
+    +title 🔎 Updating the Algolia index with webhooks and Netlify and CircleCI
+    .fla.flrnw.p-4
+      //- Rebase
+      .fln.w-33p.flcnw.flcat
+        .fln.flrnw.h-25p
+          .fla.flrnw
+            .fla.flcnw.bg-gray-4.rounded-4.p-2
+              .fla.bg-no-repeat.bg-contain.bg-center(style="background-image:url(./assets/images/rebase.png)")
+          .fln.flcnw.flc
+            .text-3.px-1 ➡️
+      .fln.w-33p.flcnw.flspb
+        .fln.h-25p.flrnw
+          .fla.flcnw.bg-blue-9.rounded-4.p-2.white
+            .fla.bg-no-repeat.bg-contain.bg-center(style="background-image:url(./assets/images/github-logo-white.png)")
+            .fln.text-3.text-center GitHub Webhooks
 
-  +slide
-    +title Not so easy
-    p GitHub webhooks are very generic
-    p All PRs, merged or closed
-    p Need a proxy to filter out the useless events and only triger on the right on
+        .fln.text-center.text-3 ⬇️
 
-  +slide
-    +title Netlify Functions
-    p Netlify allow host dynamic nodejs scripts
-    p Basically AWS lambda but deployed from the same repo
-    p Reads incoming payload, check if correct PR and ping CircleCI
+        .fln.h-25p.flrnw
+          .fla.flcnw.bg-green-9.rounded-4.p-2.white
+            .fla.bg-no-repeat.bg-contain.bg-center(style="background-image:url(./assets/images/netlify.png)")
+            .fln.text-3.text-center Netlify functions
 
-  +slide
-    +title Recap
-    p Every week the wiki is crawled and a PR created
-    p When I accept it, GitHub sends a ping to my proxy
-    p Everything checks out, it pings CircleCI that releases a new version
-    p Because new dep, Renovate will pick up on the website
-    p Make a commit on master with update with the new data
+        .fln.text-center.text-3 ⬇️
 
-  +slide
-    +title Re-indexing
-    p Want to catch the commit that updates the update
-    p Once again, too broad, listens to all commits
-    p Create a proxy, find the right commit and run yarn run algolia
-    p Now everything is ran correctly
+        .fln.h-25p.flrnw
+          .fla.flcnw.bg-gray-8.rounded-4.p-2.white
+            .fla.bg-no-repeat.bg-contain.bg-center(style="background-image:url(./assets/images/circleci-logo-white.png)")
+            .fln.text-3.text-center CircleCI
 
-  +slide
-    +title My usual routine
-    p Tuesday morning coffee, I read the PR
-    p I validate it and go to work
-    p In the background it will do a release of the module, which will trigger a re-indexing of the data and deploy of the website
-    p If I need to work on the project, a git pull gives me all the deps updated
+      //- Algolia
+      .fln.w-33p.flcnw.flcab
+        .fln.flrnw.h-25p
+          .fln.flcnw.flc
+            .text-3.px-1 ➡️
+          .fla.flrnw
+            .fla.flcnw.bg-algolia.rounded-4.p-2
+              .fla.bg-no-repeat.bg-contain.bg-center(style="background-image:url(./assets/images/algolia-logo-white.png)")
 
-  +slide
-    +title Gotchas
-    p It's a complex setup. Moving pieces.
-    p Important to document (or make a talk about it)
-    p Hard to debug. WebHooks ok, Netlify bad, CircleCI awesome.
-    p Suggest Sentry?
+  +slide.bg-cover.bg-no-repeat(style="background-image:url(./assets/images/coffee.jpg)")
+    .absolute.top-0.right-0.bottom-0.left-0.bg-black.bg-opacity-75p
+    .relative.flcnw.fla
+      .fla.flcnw.flc
+        .white.text-shadow.amaranth.bold.text-7.text-center
+          .fln Drink #[.inline.orange coffee], merge #[.inline.green PR]
+          .fln and #[.inline.blue carry on]
