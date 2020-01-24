@@ -1,7 +1,7 @@
 {
   "devDependencies": {
     "aberlaas": "0.11.3",
-    "sov": "0.0.14"
+    "sov": "0.1.0"
   },
   "files": [
     "build/"
