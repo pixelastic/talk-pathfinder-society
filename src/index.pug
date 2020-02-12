@@ -8,9 +8,12 @@ block config
   - pageUrl = "http://talks.pixelastic.com/slides/society-search-jamstack-paris/"
 
 block slides
-  +slide.bg-green.text-7
-    .fla.flcnw.flc.white.text-shadow.amaranth.bold
-      .fln.text-center Automating side projects
+  +slide
+    .absolute.inset-0.grayscale.bg-cover.bg-no-repeat(style="background-image:url(./assets/images/wally.jpg)")
+    .absolute.top-0.right-0.bottom-0.left-0.bg-green.bg-opacity-90p
+    .relative.flcnw.fla
+      .fla.flcnw.flc.white.text-shadow.amaranth.bold.text-7
+        .fln.text-center Automating side projects
 
   include /_includes/_slides/who-am-i.pug
 
@@ -33,10 +36,12 @@ block slides
         li.bullet More stakes
 
 
-  +slide.bg-green.text-7
-    .fla.flcnw.flc.white.text-shadow.amaranth.bold
-      .fln Real-life example
-
+  +slide
+    .absolute.inset-0.grayscale.bg-cover.bg-no-repeat(style="background-image:url(./assets/images/society-search.jpg)")
+    .absolute.top-0.right-0.bottom-0.left-0.bg-green.bg-opacity-90p
+    .relative.flcnw.fla
+      .fla.flcnw.flc.white.text-shadow.amaranth.bold.text-7
+        .fln.text-center Real-life example
 
   +slide.bg-cover.bg-no-repeat(style="background-image:url(./assets/images/gm.jpg)")
     .absolute.top-0.right-0.bottom-0.left-0.bg-black.bg-opacity-75p
@@ -269,7 +274,9 @@ block slides
             .fla.flcnw.bg-algolia.rounded-4.p-2
               .fla.bg-no-repeat.bg-contain.bg-center(style="background-image:url(./assets/images/algolia-logo-white.png)")
   +slide
-    +title 🔎 Updating the Algolia index with webhooks
+    +title 
+      .gray.inline 🔎 Updating the Algolia index 
+      .green.inline with webhooks
     .fla.flrnw.p-4
       //- Rebase
       .fln.w-33p.flcnw.flccv
@@ -296,7 +303,9 @@ block slides
               .fla.bg-no-repeat.bg-contain.bg-center(style="background-image:url(./assets/images/algolia-logo-white.png)")
 
   +slide
-    +title 🔎 Updating the Algolia index with webhooks and CircleCI
+    +title 
+      .gray.inline 🔎 Updating the Algolia index with webhooks 
+      .green.inline and CircleCI
     .fla.flrnw.p-4
       //- Rebase
       .fln.w-33p.flcnw.flcat
@@ -330,7 +339,9 @@ block slides
               .fla.bg-no-repeat.bg-contain.bg-center(style="background-image:url(./assets/images/algolia-logo-white.png)")
 
   +slide
-    +title 🔎 Updating the Algolia index with webhooks and Netlify and CircleCI
+    +title 
+      .gray.inline 🔎 Updating the Algolia index with webhooks and CircleCI 
+      .green.inline and Netlify
     .fla.flrnw.p-4
       //- Rebase
       .fln.w-33p.flcnw.flcat
@@ -342,23 +353,23 @@ block slides
             .text-3.px-1 ➡️
       .fln.w-33p.flcnw.flspb
         .fln.h-25p.flrnw
-          .fla.flcnw.bg-blue-9.rounded-4.p-2.white
+          .fla.flcnw.bg-blue-9.rounded-4.pt-1.white
             .fla.bg-no-repeat.bg-contain.bg-center(style="background-image:url(./assets/images/github-logo-white.png)")
-            .fln.text-3.text-center GitHub Webhooks
+            .fln.text-2.text-center GitHub Webhooks
 
         .fln.text-center.text-3 ⬇️
 
         .fln.h-25p.flrnw
-          .fla.flcnw.bg-green-9.rounded-4.p-2.white
+          .fla.flcnw.bg-green-9.rounded-4.pt-1.white
             .fla.bg-no-repeat.bg-contain.bg-center(style="background-image:url(./assets/images/netlify.png)")
-            .fln.text-3.text-center Netlify functions
+            .fln.text-2.text-center Netlify Functions
 
         .fln.text-center.text-3 ⬇️
 
         .fln.h-25p.flrnw
-          .fla.flcnw.bg-gray-8.rounded-4.p-2.white
+          .fla.flcnw.bg-gray-8.rounded-4.pt-1.white
             .fla.bg-no-repeat.bg-contain.bg-center(style="background-image:url(./assets/images/circleci-logo-white.png)")
-            .fln.text-3.text-center CircleCI
+            .fln.text-2.text-center CircleCI
 
       //- Algolia
       .fln.w-33p.flcnw.flcab
@@ -368,6 +379,34 @@ block slides
           .fla.flrnw
             .fla.flcnw.bg-algolia.rounded-4.p-2
               .fla.bg-no-repeat.bg-contain.bg-center(style="background-image:url(./assets/images/algolia-logo-white.png)")
+
+  +slide
+    +title Debugging
+    .fla.flcw
+      .fln.h-50p.w-50p.p-2.relative
+        .h-100p.w-90p.fla.bg-cover.bg-no-repeat.shadow-4(style="background-image:url(./assets/images/debug-github.png)")
+          .absolute.top-0.right-0.flrnw.bg-blue-9.rounded-4.white.h-7.px-2
+            .fla.bg-no-repeat.bg-contain.bg-center.w-6.h-100p(style="background-image:url(./assets/images/github-logo-white.png)")
+            .fln.text-2.text-center.flrnw.flc.pl-2 GitHub Webhooks
+
+      .fln.h-50p.w-50p.p-2.relative
+        .h-100p.w-90p.fla.bg-cover.bg-no-repeat.shadow-4(style="background-image:url(./assets/images/debug-circleci.png)")
+          .absolute.top-0.right-0.flrnw.bg-gray-8.rounded-4.white.h-7.px-2
+            .fla.bg-no-repeat.bg-contain.bg-center.w-6.h-100p(style="background-image:url(./assets/images/circleci-logo-white.png)")
+            .fln.text-2.text-center.flrnw.flc.pl-2 CircleCI
+      .fln.h-100p.w-50p.flcnw.flc.p-4
+        .fln.relative
+          .absolute.inset-0.-top-2.z-2.bg-white.bg-opacity-90p(data-step)
+            .absolute.-top-0.-right-3.z-1.flrnw.bg-purple-9.bg-opacity-100p.rounded-4.white.h-7.px-2
+              .fla.bg-no-repeat.bg-contain.bg-center.w-6.h-100p(style="background-image:url(./assets/images/sentry-logo-white.png)")
+              .fln.text-2.text-center.flrnw.flc.pl-2 Sentry
+            img.w-100p(src="./assets/images/debug-sentry.png")
+
+          div
+            .absolute.-top-2.right-0.z-1.flrnw.bg-green-9.rounded-4.white.h-7.px-2
+              .fla.bg-no-repeat.bg-contain.bg-center.w-6.h-100p(style="background-image:url(./assets/images/netlify.png)")
+              .fln.text-2.text-center.flrnw.flc.pl-2 Netlify Functions
+            img.w-100p.shadow-4(src="./assets/images/debug-netlify.png")
 
   +slide.bg-cover.bg-no-repeat(style="background-image:url(./assets/images/coffee.jpg)")
     .absolute.top-0.right-0.bottom-0.left-0.bg-black.bg-opacity-75p
@@ -376,3 +415,12 @@ block slides
         .white.text-shadow.amaranth.bold.text-7.text-center
           .fln Drink #[.inline.orange coffee], merge #[.inline.green PR]
           .fln and #[.inline.blue carry on]
+
+  +slide
+    .absolute.inset-0.grayscale.bg-cover.bg-no-repeat(style="background-image:url(./assets/images/coffee.jpg)")
+    .absolute.top-0.right-0.bottom-0.left-0.bg-green.bg-opacity-90p
+    .relative.flcnw.fla
+      .fla.flcnw.flc
+        .white.text-shadow.amaranth.bold.text-7.text-center Thank you
+        a.amaranth.white.text-shadow.text-6.underline(href="https://gamemaster.pixelastic.com/society/") gamemaster.pixelastic.com/society
+
