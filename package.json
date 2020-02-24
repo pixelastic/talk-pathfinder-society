@@ -1,27 +1,19 @@
 {
   "devDependencies": {
-    "aberlaas": "0.11.3",
-    "sov": "0.1.0"
+    "aberlaas": "1.1.1",
+    "sov": "0.2.0"
   },
-  "files": [
-    "build/"
-  ],
-  "main": "build/index.js",
   "name": "talk-pathfinder-society",
   "scripts": {
     "build": "./scripts/build",
     "build:prod": "./scripts/build-prod",
-    "build:watch": "./scripts/build-watch",
     "deploy": "./scripts/deploy",
     "ci": "./scripts/ci",
     "cms": "./scripts/cms",
     "husky:precommit": "./scripts/husky-precommit",
     "lint": "./scripts/lint",
     "lint:fix": "./scripts/lint-fix",
-    "release": "./scripts/release",
-    "serve": "./scripts/serve",
-    "test": "./scripts/test",
-    "test:watch": "./scripts/test-watch"
+    "serve": "./scripts/serve"
   },
   "version": "0.0.1"
 }
