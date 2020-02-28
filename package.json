@@ -7,13 +7,19 @@
   "scripts": {
     "build": "./scripts/build",
     "build:prod": "./scripts/build-prod",
-    "deploy": "./scripts/deploy",
     "ci": "./scripts/ci",
     "cms": "./scripts/cms",
+    "deploy": "./scripts/deploy",
     "husky:precommit": "./scripts/husky-precommit",
     "lint": "./scripts/lint",
     "lint:fix": "./scripts/lint-fix",
-    "serve": "./scripts/serve"
+    "release": "./scripts/release",
+    "serve": "./scripts/serve",
+    "test": "./scripts/test",
+    "test:watch": "./scripts/test-watch"
   },
-  "version": "0.0.1"
+  "version": "0.0.1",
+  "dependencies": {
+    "esm": "3.2.25"
+  }
 }
