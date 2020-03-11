@@ -1,7 +1,7 @@
 {
   "devDependencies": {
     "aberlaas": "1.2.3",
-    "sov": "0.2.3"
+    "sov": "0.2.4"
   },
   "name": "talk-pathfinder-society",
   "scripts": {
